@@ -4,8 +4,6 @@ var StartLayer = cc.Layer.extend({
  
         var size = cc.winSize;
         
-       
-        
         //add bg
         this.bgSprite = new cc.Sprite(res.spbg);
         this.bgSprite.attr({
@@ -21,6 +19,7 @@ var StartLayer = cc.Layer.extend({
           helloLabel,
           function () {
             cc.log("Menu is clicked!");
+            cc.director.runScene( new PlayScene() );
           }, this);
 
         startItem.attr({

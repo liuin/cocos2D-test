@@ -6,6 +6,7 @@
     "jsList"        : [
       "src/resource.js",
       "src/StartScene.js",
-      "src/PlayScene.js"
+      "src/PlayScene.js",
+      "src/SushiSprite.js"
     ]
 }
