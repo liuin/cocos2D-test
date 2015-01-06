@@ -1,12 +1,12 @@
-var SushiSprite = cc.Sprite.extend({
+var defSprite = cc.Sprite.extend({
     onEnter:function () {
-        //cc.log("onEnter");
+        cc.log("onEnter");
         this._super();
         this.addTouchEventListenser();
     },
  
     onExit:function () {
-        //cc.log("onExit");
+        cc.log("onExit");
     },
     addTouchEventListenser:function(){
       this.touchListener = cc.EventListener.create({
@@ -15,16 +15,13 @@ var SushiSprite = cc.Sprite.extend({
           swallowTouches: true,
           //onTouchBegan event callback function                      
           onTouchBegan: function (touch, event) { 
-              var pos = touch.getLocation();
-              var target = event.getCurrentTarget();  
-              if ( cc.rectContainsPoint(target.getBoundingBox(),pos)) {
-                  //cc.log("touched");
-                  target.getParent().addScore();//加分
-                  target.stopAllActions(); //停止状态
-                  target.removeFromParent(); //移除
-                  return true;
-              }
-              return false;
+            var pos = touch.getLocation();
+            var target = event.getCurrentTarget();  
+            if ( cc.rectContainsPoint(target.getBoundingBox(),pos)) {
+                alert('111222');
+                return true;
+            }
+            return false;
           }
       });
       cc.eventManager.addListener(this.touchListener,this);

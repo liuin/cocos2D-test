@@ -19,7 +19,7 @@ var StartLayer = cc.Layer.extend({
           helloLabel,
           function () {
             cc.log("Menu is clicked!");
-            cc.director.runScene( new PlayScene() );
+            cc.director.runScene( new PlayScene());
           }, this);
 
         startItem.attr({

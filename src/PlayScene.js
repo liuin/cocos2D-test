@@ -12,14 +12,15 @@ var PlayLayer = cc.Layer.extend({
         this.bgSprite = new cc.Sprite(res.spbg);
         this.bgSprite.attr({
             x: size.width / 2,
-            y: size.height / 2,
+            y: size.height / 2
             //scale: 0.5,
-            rotation: 180
+            //rotation: 180
         });
         this.addChild(this.bgSprite, 0);
 
         //add sprite
         this.addSushi();
+        this.addDefObj();
         
         //add more sprite
         this.schedule(this.update,1.5,16*1024,1);
@@ -87,6 +88,20 @@ var PlayLayer = cc.Layer.extend({
       this.addSushi();
       this.removeSushi();
     },
+    addDefObj : function  () {
+      var size = cc.winSize;
+      var def = new defSprite(res.def);
+
+      def.attr({
+        x: 430,
+        y: 250
+        //x: size.width / 2,
+        //y: size.height / 2
+        //scale: 0.5,
+        //rotation: 180
+      });
+      this.addChild(def ,5);
+    },
     addSushi : function() {
       var sushi = new SushiSprite(res.sp1);
       var size = cc.winSize;
@@ -96,7 +111,6 @@ var PlayLayer = cc.Layer.extend({
         x: x,
         y:size.height - 30
       });
-
       this.addChild(sushi,5);
 
       this.SushiSprites.push(sushi);//加入数组
@@ -109,9 +123,9 @@ var PlayLayer = cc.Layer.extend({
     removeSushi : function() {
       //移除到屏幕底部的sushi
       for (var i = 0; i < this.SushiSprites.length; i++) {
-          cc.log("移除.........");
+          //cc.log("移除.........");
           if(0 == this.SushiSprites[i].y) {
-              cc.log("==============remove:"+i);
+              //cc.log("==============remove:"+i);
               this.SushiSprites[i].removeFromParent();
               this.SushiSprites[i] = undefined;
               this.SushiSprites.splice(i,1);
