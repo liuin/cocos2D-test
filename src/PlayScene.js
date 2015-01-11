@@ -1,6 +1,7 @@
 var PlayLayer = cc.Layer.extend({
     bgSprite:null,
     SushiSprites:null, //数组管理
+    defSpritesObj:null,
     ctor:function () {
         this._super();
         this.SushiSprites = [];
@@ -38,9 +39,24 @@ var PlayLayer = cc.Layer.extend({
         this.timeoutLabel.y = size.height - 20;
         this.addChild(this.timeoutLabel, 5);
         this.schedule(this.timer,1,this.timeout,1);
+
+        //ifbroken
+        this.schedule(this.brokremove,0.1);
         return true;
     },
-    timer : function() {
+    brokremove:function  () {
+      var getCirle = this.defSpritesObj.getBoundingBox();
+      var getSushiSprites = this.SushiSprites;
+      var defSpritesObj = this.defSpritesObj;
+      for (var i in getSushiSprites) {
+        var getRect = getSushiSprites[i].getBoundingBox();
+        
+        if(cc.rectIntersectsRect(getCirle,getRect)){
+          this.removeChild(getSushiSprites[i]);
+        }
+      }
+    },
+    timer : function() { 
         if (this.timeout == 0) {
             //cc.log('游戏结束');
             var gameOver = new cc.LayerColor(cc.color(225,225,225,100));
@@ -90,17 +106,16 @@ var PlayLayer = cc.Layer.extend({
     },
     addDefObj : function  () {
       var size = cc.winSize;
-      var def = new defSprite(res.def);
+      this.defSpritesObj = new defSprite(res.def);
 
-      def.attr({
+      this.defSpritesObj.attr({
         x: 430,
         y: 250
         //x: size.width / 2,
         //y: size.height / 2
-        //scale: 0.5,
         //rotation: 180
       });
-      this.addChild(def ,5);
+      this.addChild(this.defSpritesObj ,5);
     },
     addSushi : function() {
       var sushi = new SushiSprite(res.sp1);

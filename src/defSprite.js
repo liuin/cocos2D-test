@@ -9,15 +9,6 @@ var defSprite = cc.Sprite.extend({
     onExit:function () {
         cc.log("onExit");
     },
-    containsTouchLocation:function (touch) {
-      
-        var getPoint = touch.getLocation();
-        var myRect = this.rect();
-
-        myRect.x += this.x;
-        myRect.y += this.y;
-        return cc.rectContainsPoint(myRect, getPoint);//this.convertTouchToNodeSpaceAR(touch));
-    },
     addTouchEventListenser:function(){
       var startX = 0;
       var startY = 0;
