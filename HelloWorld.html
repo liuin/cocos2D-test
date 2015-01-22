@@ -3,45 +3,14 @@
 <head>
     <title>Hello Cocos2d-JS</title>
     <meta charset="utf-8" />
-    <script type="text/javascript">
-    <!--
-   
-    +(function(){
-      'use strict';
-      var Fixmobile = function  () {
-        this.viwep();
-      }
-
-      Fixmobile.width = 640;
-
-      Fixmobile.prototype.viwep = function  (e) {
-        var phoneWidth = parseInt(window.screen.width),
-        phoneScale = phoneWidth/Fixmobile.width,
-        ua = navigator.userAgent,
-        headmate;
-        if (/Android (\d+\.\d+)/.test(ua)){
-          var version = parseFloat(RegExp.$1);
-          // andriod 2.3
-          if(version > 2.3){
-            document.write('<meta name="viewport" content="width=' + Fixmobile.width + ', minimum-scale = ' + phoneScale + ', maximum-scale = '+phoneScale+', target-densitydpi=device-dpi">');
-          // andriod 2.3以上
-          }else{
-            document.write('<meta name="viewport" content="width=' + Fixmobile.width + ', target-densitydpi=device-dpi">');
-          }
-          // 其他系统
-        } else {
-          document.write('<meta name="viewport" content="width=' + Fixmobile.width + ', user-scalable=no, target-densitydpi=device-dpi">');
-        }
-      }
-      var newviewport = new Fixmobile();
-    })();
-
-    //-->
-    </script>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
     <script type="text/javascript" src="cocos2d-js-v3.1-lite.js" charset="UTF-8"></script>
 </head>
-<body>   
-  <canvas id="gameCanvas" width="800" height="450"></canvas>
+<body>
+<style type="text/css">
+  body {width:320px; overflow:hidden;margin:0 auto;}
+</style>
+  <canvas id="gameCanvas" width="320" height="650"></canvas>
   <script type="text/javascript">
     window.onload = function(){
       cc.game.onStart = function(){

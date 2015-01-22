@@ -41,18 +41,30 @@ var PlayLayer = cc.Layer.extend({
         this.schedule(this.timer,1,this.timeout,1);
 
         //ifbroken
-        this.schedule(this.brokremove,0.1);
+        this.schedule(this.brokremove,0.2);
         return true;
     },
     brokremove:function  () {
       var getCirle = this.defSpritesObj.getBoundingBox();
       var getSushiSprites = this.SushiSprites;
       var defSpritesObj = this.defSpritesObj;
+      var _this = this;
       for (var i in getSushiSprites) {
         var getRect = getSushiSprites[i].getBoundingBox();
         
         if(cc.rectIntersectsRect(getCirle,getRect)){
-          this.removeChild(getSushiSprites[i]);
+
+          getSushiSprites[i].stopAction(getSushiSprites[i].da);
+
+          var action1 = cc.sequence(
+            cc.blink(0.5, 3),
+            cc.callFunc(function  () {
+              console.log(i);
+              _this.removeChild(getSushiSprites[i]);
+            })
+          )
+          getSushiSprites[i].runAction(action1);
+          //this.removeChild(getSushiSprites[i]);
         }
       }
     },
@@ -109,8 +121,8 @@ var PlayLayer = cc.Layer.extend({
       this.defSpritesObj = new defSprite(res.def);
 
       this.defSpritesObj.attr({
-        x: 430,
-        y: 250
+        x: size.width / 2,
+        y: size.height /2
         //x: size.width / 2,
         //y: size.height / 2
         //rotation: 180
@@ -122,6 +134,7 @@ var PlayLayer = cc.Layer.extend({
       var size = cc.winSize;
 
       var x = sushi.width/2+size.width/2*cc.random0To1();
+      var rod = cc.random0To1();
       sushi.attr({
         x: x,
         y:size.height - 30
@@ -129,11 +142,13 @@ var PlayLayer = cc.Layer.extend({
       this.addChild(sushi,5);
 
       this.SushiSprites.push(sushi);//加入数组
-
+      
+      sushi.bood = 0;
 
       //move
       var dorpAction = cc.MoveTo.create(4, cc.p(sushi.x,-30));
-      sushi.runAction(dorpAction);
+      sushi.da = dorpAction;
+      sushi.runAction(sushi.da);
     },
     removeSushi : function() {
       //移除到屏幕底部的sushi
